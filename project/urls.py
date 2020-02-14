@@ -18,9 +18,17 @@ from django.urls import path,include
 from user import views as user_view
 from django.contrib.auth import views as auth
 
+from .router import router
+from rest_framework.authtoken import views
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+
+    ######### api path ##########################
+
+    path('api/',include(router.urls)),
+    path('api-token-auth/',views.obtain_auth_token,name='api-tokn-auth'),
 
     #####user related path##########################
     path('',include('user.urls')),
